@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="">
+      <form #formvalidation="ngForm">
+          <div class="alert alert-danger" *ngIf=" (errorValidation && firstname.errors &&firstname.errors.required)">
+              <strong>First Name is Required</strong>
+            </div>
+          <div class="row">
+              <div class="col-md-3">
+                <label for="firstName"><b>First Name:</b></label>
+              </div>
+              <div class="col-md-9">
+                <input type="text" placeholder="" name="firstName" autocomplete="off" [(ngModel)]="firstName" required #firstname="ngModel">
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf=" (errorValidation && lastname.errors &&lastname.errors.required)">
+                <strong>Last Name is Required</strong>
+              </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="lastName"><b>Last Name:</b></label>
+              </div>
+              <div class="col-md-9">
+                <input type="text" placeholder="" name="lastName" autocomplete="off" [(ngModel)]="lastName" required #lastname="ngModel">
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf=" (errorValidation && empid.errors &&empid.errors.required)">
+                <strong>Employee ID is Required</strong>
+              </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="empId"><b>Employee ID:</b></label>
+              </div>
+              <div class="col-md-5">
+                <input type="text" placeholder="" name="empId" autocomplete="off" [(ngModel)]="empId"  pInputText pKeyFilter="num" required #empid="ngModel">
+              </div>
+            </div>
+      </form>
+      <div class="add-button-div1">
+        <div class="add-button-div2">
+          <button class="add-button" (click)="addUser(formvalidation)">Add</button>
+          <button class="add-button" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    
+      <div class="progress-bar"></div>
+    
+      <!----   filters    ---->
+      <div class="border-dotted">
+        <div class="row">
+          <div class="col-md-5">
+              <input type="text" class="mt-3" placeholder="Search....." name="search" [(ngModel)]="search">
+          </div>
+          <div class="col-md-7">
+          <div class="mt-3 float-right">
+              <label for="sort"><b>Sort:</b></label>
+              <button class="" (click)="orderBy('firstName')">First Name</button>
+              <button class="" (click)="orderBy('lastName')">Last Name</button>
+              <button class=""(click)="orderBy('empId')">Id</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- user view -->
+      <div class="border-dotted" *ngFor="let user of users | paginate: { itemsPerPage: 4, currentPage: p } | orderBy: oreder |filter:search">
+        <div class="row">
+          <div class="col-md-9" *ngIf="temp!=user._id">
+            <input type="text" class="mt-3" placeholder="" name="efirstName" [disabled]="true" [(ngModel)]="user.firstName"
+              required>
+            <input type="text" class="mt-3" placeholder="" name="elastName" [disabled]="true" [(ngModel)]="user.lastName"
+              required>
+            <input type="text" class="mt-3" placeholder="" name="eempId" [disabled]="true" [(ngModel)]="user.empId"
+              required>
+          </div>
+          <div class="col-md-9" *ngIf="temp==user._id">
+            <input type="text" class="mt-3" placeholder="" name="efirstName" [disabled]="false" [(ngModel)]="e_firstName"
+              required>
+            <input type="text" class="mt-3" placeholder="" name="elastName" [disabled]="false" [(ngModel)]="e_lastName"
+              required>
+            <input type="text" class="mt-3" placeholder="" name="eempId" [disabled]="false" [(ngModel)]="e_empId" required>
+          </div>
+          <div class="col-md-3" *ngIf="temp!=user._id">
+            <div class="mt-3">
+              <button class="edit-button" (click)="editUserData(user)" [disabled]="disabled">Edit</button>
+            </div>
+            <div class="mt-3">
+              <button class="edit-button" (click)="deleteUser(user)" [disabled]="disabled">Delete</button>
+            </div>
+          </div>
+          <div class="col-md-3" *ngIf="temp==user._id">
+            <div class="mt-3">
+              <button class="edit-button" (click)="saveUserData(user)" [disabled]="!disabled">Save</button>
+            </div>
+            <div class="mt-3">
+              <button class="edit-button" (click)="cancelUserData()" [disabled]="!disabled">Cancel</button>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    
+  </div>
+  <div class="col-md-2"></div>
+</div>

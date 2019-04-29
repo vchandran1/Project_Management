@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div>
+
+      <form #formvalidation="ngForm">
+          <div class="row ">
+              <div class="col-md-2 mt-3">
+                <label for="firstName"><b>Project:</b></label>
+              </div>
+              <div class="col-md-10 ">
+                <div class="row">
+                  <div class="col-md-9 col-sm-7 col-8">
+                      <input type="text" class="input-text" placeholder="" name="Project" [(ngModel)]="search.Project" (click)="showProjectList()" autocomplete="off" [disabled]="!disabled" required>
+                      <div class="row dropdown">
+                        <div class="col-md-12">
+                            <ul class="list-group projectSearch" *ngIf="showprojectlist">
+                                <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let project of Projects | filterBy:search" (click)="attachProjectName(project.Project,project._id)">
+                                  {{project.Project}}
+                                </li>
+                              </ul>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3 col-sm-5 col-4">
+                      <button class="btn-search">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          <div class="row">
+              <div class="col-md-2">
+                <label for="firstName"><b>Task:</b></label>
+              </div>
+              <div class="col-md-10">
+                <input type="text" class="input-text" placeholder="" name="Task" [(ngModel)]="Task" required autocomplete="off"
+                  #project="ngModel">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-12 input-checkbox-div">
+                    <input type="checkbox" class="input-checkbox" name="parentTask" autocomplete="off" [(ngModel)]="parentTask" (click)="parentTaskCheck()" [disabled]="!disabled"> Parent Task
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-md-2">
+                <label for="firstName"><b>Priority:</b></label>
+              </div>
+              <div class="col-md-10">
+              <!-------   range slider  --------->
+              <ng5-slider [(value)]="Priority" [options]="options"></ng5-slider>
+              </div>
+            </div>
+  
+            <div class="row">
+                <div class="col-md-2">
+                  <label for="firstName"><b>Parent Task:</b></label>
+                </div>
+                <div class="col-md-10 ">
+                  <div class="row">
+                    <div class="col-md-9 col-sm-7 col-8">
+                        <input type="text" class="input-text" placeholder="" name="ParentTask" autocomplete="off" [(ngModel)]="serchParentTask.Parent_Task" (click)="showParentTaskList()" required>
+                        <ul class="list-group projectSearch" *ngIf="showParentTasklist && !parentTask">
+                          <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let parent of parentTasks | filterBy:serchParentTask" (click)="attachParentTask(parent.Parent_Task,parent._id)">
+                            {{parent.Parent_Task}}
+                          </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-5 col-4">
+                        <button class="btn-search">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row margin-buttom-0">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-4"> <label for="StartDate"><b>Start Date:</b></label></div>
+                      <div class="col-md-8">
+                          <input type="date" class="input-date dateclass placeholderclass" [min]="startdate" (change)="startdatevalidation()"  placeholder="Start Date" name="StartDate" [(ngModel)]="StartDate"
+                          required #startDate="ngModel">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="row">
+                          <div class="col-md-4"> <label for="EndDate"><b>End Date:</b></label></div>
+                          <div class="col-md-8">
+                              <input type="date" class="input-date dateclass placeholderclass" [min]="enddate" placeholder="End Date" name="EndDate" [(ngModel)]="EndDate"
+                              required #endDate="ngModel">
+                          </div>
+                        </div>
+                  </div>
+                </div>
+            <div class="row">
+                <div class="col-md-2">
+                  <label for="firstName"><b>User:</b></label>
+                </div>
+                <div class="col-md-10 ">
+                  <div class="row">
+                    <div class="col-md-9 col-sm-7 col-8">
+                        <input type="text" class="input-text" placeholder="" name="user" autocomplete="off" [(ngModel)]="searchUser.firstName" [disabled]="!disabled" (click)="showUserList()" required>
+                        <ul class="list-group projectSearch" *ngIf="showuserlist">
+                          <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let user of users | filterBy:searchUser" (click)="attachUserName(user.firstName,user._id)">
+                            {{user.firstName}}
+                          </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-5 col-4">
+                        <button class="btn-search">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+      </form>
+      <div class="add-button-div1">
+        <div class="add-button-div2" *ngIf="!updateButton">
+          <button class="add-button" (click)="addTask(formvalidation)">Add Task</button>
+          <button class="add-button" (click)="reset()">Reset</button>
+        </div>
+        <div class="add-button-div2" *ngIf="updateButton">
+            <button class="add-button" (click)="saveUpdateTask(formvalidation)">Update</button>
+            <button class="add-button" >
+                <a href='#' class="a-cancel" [routerLink]="['/viewTask']" (click)="cnacel()">Cancel</a></button>
+          </div>
+      </div>
+    
+  
+  </div>
+  
+  </div>
+  <div class="col-md-2"></div>
+</div>

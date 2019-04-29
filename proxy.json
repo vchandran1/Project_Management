@@ -1,0 +1,11 @@
+{
+    "/AddUser/*":{
+        "target":"http://localhost:4020"
+    },
+    "/AddProject/*":{
+        "target":"http://localhost:4020"
+    },
+    "/AddTask/*":{
+        "target":"http://localhost:4020"
+    }
+}

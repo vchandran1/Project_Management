@@ -1,0 +1,47 @@
+.container{
+    margin-top: 1rem
+}
+input{
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+.row{
+    margin-bottom: .75rem;
+}
+button{
+    padding: 9px;
+    margin-left: .70rem;
+    background-color: rgb(186, 186, 186);
+    border-color: rgb(71, 70, 70);
+    border-width: .1rem;
+}
+.border-dotted{
+    border-bottom: 2px dotted #1e4fa9;
+}
+.bg{
+    background-color: rgb(186, 186, 186);
+    margin-left: 5px;
+}
+.btn-width{
+    width: 100%;
+}
+
+.list-group-item{
+    border: none;
+  }
+  .list-group-item-dark{
+    background-color: #f1f1f1;
+  
+  }
+  .list-row{
+    margin-bottom: 0;
+  }
+  .list-padding-top{
+    padding-top:0; 
+  }
+  .a-cancel{
+    color: black;
+  }

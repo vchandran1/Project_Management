@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="">
+
+      <!----------- Project add ------------->
+      <form #formvalidation="ngForm">
+          <div class="row">
+              <div class="col-md-2">
+                <label for="firstName"><b>Project:</b></label>
+              </div>
+              <div class="col-md-10">
+                <input type="text" class="input-text" placeholder="" name="Project" [(ngModel)]="Project" autocomplete="off" required
+                  #project="ngModel">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-5 input-checkbox-div">
+                    <input type="checkbox" class="input-checkbox" name="setDates" [(ngModel)]="setDates"> Set Start and End Date
+                  </div>
+                  <div class="col-md-7 input-date-div">
+                    <div class="row margin-buttom-0">
+                      <div class="col-md-6">
+                        <input type="date" [ngClass]="inputStartDate" placeholder="Start Date" [min]="startdate" name="StartDate" [(ngModel)]="StartDate"
+                          (click)="inputStart()" (change)="startdatevalidation()" [disabled]="!setDates"
+                          required #startDate="ngModel">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="date" [ngClass]="inputEndDate" placeholder="End Date" [min]="enddate" name="EndDate" [(ngModel)]="EndDate"
+                        (click)="inputEnd()"  [disabled]="!setDates"
+                        required #endDate="ngModel">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-md-2">
+                <label for="firstName"><b>Priority:</b></label>
+              </div>
+              <div class="col-md-10">
+              <!-------   range slider  --------->
+              <ng5-slider [(value)]="Priority" [options]="options"></ng5-slider>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="firstName"><b>Manager:</b></label>
+              </div>
+              <div class="col-md-10 ">
+                <div class="row">
+                  <div class="col-md-9 col-sm-7 col-8">
+                      <input type="text" class="input-text" placeholder="" name="manager" [(ngModel)]="manager" required>
+                  </div>
+                  <div class="col-md-3 col-sm-5 col-4">
+                      <button class="btn-search">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </form>
+      <div class="add-button-div1">
+        <div class="add-button-div2" *ngIf="!updateButton">
+          <button class="add-button" (click)="addProject(formvalidation)">Add</button>
+          <button class="add-button" (click)="reset()">Reset</button>
+        </div>
+        <div class="add-button-div2" *ngIf="updateButton">
+            <button class="add-button" (click)="saveUpdateProject(formvalidation)">Update</button>
+            <button class="add-button" (click)="cnacel()">Cancel</button>
+          </div>
+      </div>
+    
+      <div class="progress-bar"></div>
+    
+      <!----------- filters ------------->
+      <div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <input type="text" class="input-text" placeholder=" Search....." name="search" [(ngModel)]="search.Project"
+              required #firstname="ngModel">
+          </div>
+        </div>
+    
+        <div class="sort-button-div1">
+          <div class="sort-button-div2">
+            <label for="sort"><b>Sort By:</b></label>
+            <button class="" (click)="orderBy('StartDate')">Start Date</button>
+            <button class="" (click)="orderBy('EndDate')">End Date</button>
+            <button class="" (click)="orderBy('Priority')">Priority</button>
+            <button class="" (click)="orderBy('CompletedTasks')">Completed</button>
+          </div>
+        </div>
+    
+      </div>
+    <!----------- Project view ------------->
+    <div>
+      
+    </div>
+    <div class="border-dotted" *ngFor="let project of Projects | paginate: { itemsPerPage: 4, currentPage: p } | orderBy: oreder | filterBy:search">
+        <div class="row mt-3">
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-dark list-padding-top"><b>Project: </b><span class="text-info">{{project.Project}}</span></li>
+                <li class="list-group-item list-group-item-dark list-padding-top">
+                    <div class="row list-row">
+                        <div class="col-md-6"><b>No of Tasks:</b><span class="text-info">{{project.NoOfTasks}}</span> </div>
+                        <div class="col-md-6"><b>Completed:</b><span class="text-info">{{project.CompletedTasks}}</span></div>
+                      </div>
+                    <div class="row list-row">
+                        <div class="col-md-6"><b>Start Date:</b> <span class="text-info">{{project.StartDate}}</span></div>
+                        <div class="col-md-6"><b>End Date:</b> <span class="text-info">{{project.EndDate}}</span></div>
+                      </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-2">
+              <li class="list-group-item ">Priority </li>
+              <li class="list-group-item list-group-item-dark"> {{project.Priority}}</li>
+            </div>
+            <div class="col-md-2">
+                <button class="edit-button update-button" (click)="updateProject(project)">Update</button> 
+                <button class="edit-button">Suspend</button> 
+            </div>
+          </div>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+    </div>
+    
+  </div>
+  <div class="col-md-2"></div>
+</div>
