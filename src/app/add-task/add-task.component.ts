@@ -167,7 +167,7 @@ export class AddTaskComponent implements OnInit {
         Priority:this.Priority,
         parent_ID:this.ParentTask_id
       }
-          console.log(task)
+          //console.log(task)
     if(formvalidation.form.controls.EndDate.status=="VALID" && 
     formvalidation.form.controls.StartDate.status=="VALID"){
       this.http.post("AddTask/UpdateTask",task).subscribe(dt=>{
