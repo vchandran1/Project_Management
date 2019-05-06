@@ -1,0 +1,30 @@
+ pluginManagement{
+	 
+	 resolutionStrategy {
+		 eachPlugin {
+			 if (requested.id.namespace == 'org.springframework') {
+				 useModule("org.springframework.boot:spring-boot-gradle-plugin:${requested.version}")
+			 } else if (requested.id.namespace == 'io.spring') {
+				 useModule("io.spring.gradle:dependency-management-plugin:${requested.version}")
+			 }
+		 }
+	 }
+	 
+	 repositories {
+		 maven {
+			 credentials {
+				 username "${artifactory_user}"
+				 password "${artifactory_password}"
+			 }
+			 url "${artifactory_contextUrl}/libs-release"
+		 }
+		 maven {
+			 credentials {
+				 username "${artifactory_user}"
+				 password "${artifactory_password}"
+			 }
+			 url "${artifactory_contextUrl}/libs-snapshot"
+		 }
+	 }
+ }
+rootProject.name = 'services'
