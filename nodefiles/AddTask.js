@@ -6,7 +6,6 @@ rout=exp.Router()
 // ===============  Add Task  ================
 rout.post('/addTask',function(req,res){
     dt=req.body;
-    var Parent_ID;
     if(dt.parentTask==true){
         conn.parentTaskTable.find().sort({_id:-1}).limit(1,function(err,rs){
             //console.log(rs)
@@ -16,12 +15,10 @@ rout.post('/addTask',function(req,res){
                 id=rs[0]._id;
                 id++
             }
-            Parent_ID=id
             conn.parentTaskTable.save({_id:id,Parent_Task:dt.Task},addtask())
         })
         // res.send("inserted")
     }else{
-        Parent_ID=dt.parent_ID;
         addtask();
     }
     function addtask(){
@@ -34,7 +31,7 @@ rout.post('/addTask',function(req,res){
                 Id=rs[0]._id;
                 Id++
             }
-            conn.taskTable.save({_id:Id,Parent_ID:Parent_ID,Project_ID:dt.Project_ID,Task:dt.Task,Start_Date:dt.Start_Date,
+            conn.taskTable.save({_id:Id,Parent_ID:dt.parent_ID,Project_ID:dt.Project_ID,Task:dt.Task,Start_Date:dt.Start_Date,
                 End_Date:dt.End_Date,Priority:dt.Priority,Status:""},updateUser())
         })
         res.send("inserted")
@@ -42,6 +39,13 @@ rout.post('/addTask',function(req,res){
     function updateUser(){
         conn.usersTable.update({_id:dt.User_id},{$set:{projectId:dt.Project_ID,taskId:Id}});
     }
+})
+
+// ===========  update task  ============
+rout.post('/UpdateTask',function(req,res){
+    dt=req.body;
+conn.taskTable.update({_id:dt._id},{$set:dt})
+res.send("updated")
 })
 
 rout.get('/getParentTask',function(req,res){

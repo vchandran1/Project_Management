@@ -12,10 +12,10 @@
       <div class="col-md-7">
       <div class="mt-3 float-right">
           <label for="sort"><b>Sort Task By:</b></label>
-          <button class="button-btn" (click)="orderBy('Start_Date')">Start Date</button>
-          <button class="button-btn" (click)="orderBy('End_Date')">End Date</button>
-          <button class="button-btn"(click)="orderBy('Priority')">Priority</button>
-          <button class="button-btn"(click)="orderBy('Status')">Completed</button>
+          <button class="button-btn sort-btn" (click)="orderBy('Start_Date')">Start Date</button>
+          <button class="button-btn sort-btn" (click)="orderBy('End_Date')">End Date</button>
+          <button class="button-btn sort-btn"(click)="orderBy('Priority')">Priority</button>
+          <button class="button-btn sort-btn"(click)="orderBy('Status')">Completed</button>
       </div>
       </div>
     </div>
@@ -89,17 +89,17 @@
               <div class="col-md-12"><li class="list-group-item list-group-item-dark">{{task.End_Date}}</li></div>
             </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-custum-3">
         <div class="row">
             <div class="col-md-12"></div>
           </div>
           <div class="row">
               <div class="col-md-6">
-                  <button class="btn-width" ><a href='#' class="a-cancel" [routerLink]="['/addTask']" (click)="editTask(task)">Edit</a></button>
+                  <button class="btn-width" [routerLink]="['/addTask']" (click)="editTask(task)" ><a  class="a-cancel" >Edit</a></button>
               </div>
               <div class="col-md-6">
                 <button *ngIf="task.Status!='Completed'" class="btn-width" (click)="endTask(task._id)">End Task</button>
-                <li *ngIf="task.Status=='Completed'" class="list-group-item list-group-item-dark"> {{task.Status}}</li>
+                <li *ngIf="task.Status=='Completed'" class="list-group-item list-group-item-dark complete-btn"> {{task.Status}}</li>
               </div>
             </div>
     </div>

@@ -34,7 +34,7 @@ button{
   }
   .list-group-item-dark{
     background-color: #f1f1f1;
-  
+
   }
   .list-row{
     margin-bottom: 0;
@@ -45,3 +45,53 @@ button{
   .a-cancel{
     color: black;
   }
+  @media screen and (max-width: 480px) {
+    .sort-btn{
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: .50rem;
+    }
+    .btn-width{
+      margin-left: 0;
+      margin-bottom: .50rem;
+    }
+    label{
+      margin-bottom: 0;
+    }
+    .list-group-item {
+      padding: .50rem;
+    }
+    .row[_ngcontent-c1] {
+      margin-bottom: .50rem;
+  }
+    }
+    @media screen and (max-width: 600px) {
+
+      .btn-width{
+        margin-left: 0;
+        margin-bottom: .50rem;
+      }
+      .list-group-item {
+        padding: .50rem;
+      }
+
+      }
+      @media screen and (max-width: 800px) {
+        .col-md-5, .col-md-7{
+          flex: auto;
+          max-width: -webkit-fill-available;
+        }
+      .col-custum-3{
+        flex: auto;
+        max-width: -webkit-fill-available;
+      }
+
+        .complete-btn{
+          display: -webkit-inline-box;
+        }
+        .list-group-item {
+          padding: .50rem;
+          
+        }
+        }
+      

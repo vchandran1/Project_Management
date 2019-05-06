@@ -4,7 +4,6 @@ Needed Tools & Softwares:
 Node : ^10.13.0
 Angular: @angular/cli (7.0.0)
 Mongoldb: ^3.5.2
-GIT Repository : https://github.com/vchandran1/Project_Management.git
 
 Step 1: Run Mongodb sever by following below steps.
 

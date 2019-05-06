@@ -63,6 +63,10 @@ export class ViewTaskComponent implements OnInit {
       this.ParentTasks.forEach((parent, j) => {
         if (task.Parent_ID == parent._id) {
           this.Tasks[i].ParentTask = parent.Parent_Task;
+        }else{
+          if(task.Parent_ID == ""){
+            this.Tasks[i].ParentTask = "This Task Has No Parent"
+          }
         }
       })
     });

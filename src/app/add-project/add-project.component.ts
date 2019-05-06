@@ -1,4 +1,6 @@
 import { Component, OnInit,Inject } from '@angular/core';
+import { DatepickerOptions } from 'ng2-datepicker';
+import * as frLocale from 'date-fns/locale/fr';
 import {TaskService} from '../task.service'
 import { Options } from 'ng5-slider';
 import {Http} from '@angular/http';
@@ -18,6 +20,24 @@ export class AddProjectComponent implements OnInit {
 
   //========= set start date and end date========
   setDates=false;
+
+  // options: DatepickerOptions = {
+  //   minYear: 1970,
+  //   maxYear: 2030,
+  //   displayFormat: 'MMM D[,] YYYY',
+  //   barTitleFormat: 'MMMM YYYY',
+  //   dayNamesFormat: 'dd',
+  //   firstCalendarDay: 0, // 0 - Sunday, 1 - Monday
+  //   locale: frLocale,
+  //   minDate: new Date(Date.now()), // Minimal selectable date
+  //   maxDate: new Date(Date.now()),  // Maximal selectable date
+  //   barTitleIfEmpty: 'Click to select a date',
+  //   placeholder: 'Click to select a date', // HTML input placeholder attribute (default: '')
+  //   addClass: 'form-control', // Optional, value to pass on to [ngClass] on the input field
+  //   addStyle: {}, // Optional, value to pass to [ngStyle] on the input field
+  //   fieldId: 'my-date-picker', // ID to assign to the input field. Defaults to datepicker-<counter>
+  //   useEmptyBarTitle: false, // Defaults to true. If set to false then barTitleIfEmpty will be disregarded and a date will always be shown 
+  // };
 
     // ============ date validations  ===========
     startdate;enddate
@@ -56,21 +76,29 @@ export class AddProjectComponent implements OnInit {
     }
   }
 
-  Project;StartDate;EndDate;manager
+  Project;StartDate;EndDate;manager;existProject=false;
   addProject(formvalidation){
     // console.log(formvalidation)
     if(formvalidation.form.controls.EndDate.status=="VALID" && 
     formvalidation.form.controls.Project.status=="VALID"&&
     formvalidation.form.controls.StartDate.status=="VALID"){
-      this.http.post("AddProject/addProject",{Project:this.Project,StartDate:this.StartDate,EndDate:this.EndDate,Priority:this.Priority}).subscribe(dt=>{
-        // alert(dt._body);
-        this.Project="";this.EndDate="";this.StartDate="";this.manager="";this.Priority=0;
-        this.getProject();
-        this.inputStart();
-        this.inputEnd();
+      this.http.post("AddProject/addProject",{Project:this.Project,StartDate:this.StartDate,EndDate:this.EndDate,Priority:this.Priority}).subscribe(result=>{
+        // alert(result._body);
+        if(JSON.parse(result._body).status == 200){
+          this.Project="";this.EndDate="";this.StartDate="";this.manager="";this.Priority=0;
+          //this.getProject();
+          this.ngOnInit()
+          this.inputStart();
+          this.inputEnd();
+          this.existProject=false;
+          this.errorValidation=false;
+        }else{
+          this.existProject=true;
+        }
       }) 
     }else{
-      alert("Enter valid Details")
+      this.errorValidation=true;
+      // alert("Enter valid Details")
     }
   }
   // ========== get Projects =============
@@ -107,13 +135,14 @@ export class AddProjectComponent implements OnInit {
         this.Projects[i].NoOfTasks=noOfTasks;
         this.Projects[i].CompletedTasks=CompletedTasks;
       });
-      // console.log(this.Projects)
+      console.log(this.Projects)
     }
 
   //===========  update button  ============
   updateButton=false;oldProjectDate
   updateProject(project){
     this.oldProjectDate=project;
+    this.setDates=true;
     this.updateButton=true;
     this.Project=project.Project;
     this.Priority=project.Priority;
@@ -124,20 +153,31 @@ export class AddProjectComponent implements OnInit {
 
   }
 // ===========  save update project ======
+  errorValidation=false
   saveUpdateProject(formvalidation){
+    console.log(this.oldProjectDate)
     if(formvalidation.form.controls.EndDate.status=="VALID" && 
     formvalidation.form.controls.Project.status=="VALID"&&
     formvalidation.form.controls.StartDate.status=="VALID"){
-      var newProjectDate={Project:this.Project,StartDate:this.StartDate,EndDate:this.EndDate,Priority:this.Priority}
-      this.http.post("AddProject/updateProject",[this.oldProjectDate,newProjectDate]).subscribe(dt=>{
-        // alert(dt._body);
-        this.Project="";this.EndDate="";this.StartDate="";this.manager="";this.Priority=0;
-        this.getProject();
-        this.inputStart();
-        this.inputEnd();
+      var newProjectDate={_id:this.oldProjectDate._id,Project:this.Project,StartDate:this.StartDate,EndDate:this.EndDate,Priority:this.Priority}
+      this.http.post("AddProject/updateProject",newProjectDate).subscribe(result=>{
+        // alert(result._body);
+        if(JSON.parse(result._body).status == 200){
+          this.Project="";this.EndDate="";this.StartDate="";this.manager="";this.Priority=0;
+          //this.getProject();
+          this.ngOnInit()
+          this.inputStart();
+          this.inputEnd();
+          this.cnacel()
+          this.existProject=false;
+          this.errorValidation=false;
+        }else{
+          this.existProject=true;
+        }
       }) 
     }else{
-      alert("Enter valid Details")
+      this.errorValidation=true;
+      // alert("Enter valid Details")
     }
   }
 
@@ -148,6 +188,8 @@ export class AddProjectComponent implements OnInit {
     this.EndDate='';
     this.Priority=0;
     this.manager='';
+    this.existProject=false;
+    this.errorValidation=false;
     this.inputStart();
     this.inputEnd();
   }

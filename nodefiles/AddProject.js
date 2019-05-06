@@ -6,17 +6,25 @@ rout=exp.Router()
 rout.post('/addProject',function(req,res){
     dt=req.body;
     // console.log(dt)
-    conn.projectTable.find().sort({_id:-1}).limit(1,function(err,rs){
-        //console.log(rs)
-        if(rs.length==0){
-            id=1;
+    conn.projectTable.find({Project:dt.Project},(err,result)=>{
+        // console.log(result)
+        if(result.length != 0){
+            res.send({status:404})
         }else{
-            id=rs[0]._id;
-            id++
+            conn.projectTable.find().sort({_id:-1}).limit(1,function(err,rs){
+                //console.log(rs)
+                if(rs.length==0){
+                    id=1;
+                }else{
+                    id=rs[0]._id;
+                    id++
+                }
+                conn.projectTable.save({_id:id,Project:dt.Project,StartDate:dt.StartDate,EndDate:dt.EndDate,Priority:dt.Priority})
+            })
+            res.send({status:200})
         }
-        conn.projectTable.save({_id:id,Project:dt.Project,StartDate:dt.StartDate,EndDate:dt.EndDate,Priority:dt.Priority})
     })
-    res.send("inserted")
+
 })
 
 rout.get('/getProjects',function(req,res){
@@ -28,8 +36,24 @@ rout.get('/getProjects',function(req,res){
 rout.post('/updateProject',function(req,res){
     dt=req.body;
     //console.log(dt)
-    conn.projectTable.update(dt[0],{$set:dt[1]})
-    res.send("updated")
+    conn.projectTable.find({Project:dt.Project},(err,result)=>{
+        // console.log(result)
+        if(result.length != 0){
+            for(i=0;i<=result.length-1;i++){
+                if(result[i]._id == dt._id){
+                    conn.projectTable.update({_id:dt._id},{$set:dt})
+                    res.send({status:200})
+                }else{
+                    if(i == result.length-1){
+                        res.send({status:404})
+                    }
+                }
+            }
+        }else{
+            conn.projectTable.update({_id:dt._id},{$set:dt})
+            res.send({status:200})
+        }
+    })
 })
 
 rout.post('/deletUser',function(req,res){

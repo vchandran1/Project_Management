@@ -5,17 +5,24 @@ conn=mj("mongodb://localhost:27017/ProjectManager")
 rout=exp.Router()
 rout.post('/addUser',function(req,res){
     dt=req.body;
-    conn.usersTable.find().sort({_id:-1}).limit(1,function(err,rs){
-        console.log(rs)
-        if(rs.length==0){
-            id=1;
+    conn.usersTable.find({empId:dt.empId},(err,result)=>{
+        // console.log(result)
+        if(result.length != 0){
+            res.send({status:404})
         }else{
-            id=rs[0]._id;
-            id++
+            conn.usersTable.find().sort({_id:-1}).limit(1,function(err,rs){
+                // console.log(rs)
+                if(rs.length==0){
+                    id=1;
+                }else{
+                    id=rs[0]._id;
+                    id++
+                }
+                conn.usersTable.save({_id:id,firstName:dt.firstName,lastName:dt.lastName,empId:dt.empId,projectId:"",taskId:""})
+            })
+            res.send({status:200})
         }
-        conn.usersTable.save({_id:id,firstName:dt.firstName,lastName:dt.lastName,empId:dt.empId,projectId:"",taskId:""})
     })
-    res.send("inserted")
 })
 
 rout.get('/getUsers',function(req,res){

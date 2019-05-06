@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+.error-msg{
+    float: right;
+    margin-bottom: 0;
+    color: indianred;
+}
+@media (max-width: 800px){
+    .col-md-2 {
+      flex: auto;
+      max-width: -webkit-fill-available;
+  }
+    .col-md-8 {
+      flex: auto;
+      max-width:-webkit-fill-available;
+    }
+    .col-md-10 {
+      flex: auto;
+      max-width:-webkit-fill-available;
+    }
+  }

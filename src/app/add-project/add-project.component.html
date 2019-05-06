@@ -12,7 +12,9 @@
               <div class="col-md-10">
                 <input type="text" class="input-text" placeholder="" name="Project" [(ngModel)]="Project" autocomplete="off" required
                   #project="ngModel">
-              </div>
+                  <p class="error-msg" *ngIf=" (errorValidation && project.errors &&project.errors.required)">Project is Required</p>
+                  <p class="error-msg" *ngIf="existProject">Project is existed</p>
+                </div>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
@@ -34,6 +36,7 @@
                         required #endDate="ngModel">
                       </div>
                     </div>
+                    <p class="error-msg" *ngIf=" (errorValidation && endDate.errors &&endDate.errors.required) || (errorValidation && !setDates)">StartDate & EndDate is Required</p>
                   </div>
                 </div>
               </div>
@@ -89,10 +92,10 @@
         <div class="sort-button-div1">
           <div class="sort-button-div2">
             <label for="sort"><b>Sort By:</b></label>
-            <button class="" (click)="orderBy('StartDate')">Start Date</button>
-            <button class="" (click)="orderBy('EndDate')">End Date</button>
-            <button class="" (click)="orderBy('Priority')">Priority</button>
-            <button class="" (click)="orderBy('CompletedTasks')">Completed</button>
+            <button class="sort-btn" (click)="orderBy('StartDate')">Start Date</button>
+            <button class="sort-btn" (click)="orderBy('EndDate')">End Date</button>
+            <button class="sort-btn" (click)="orderBy('Priority')">Priority</button>
+            <button class="sort-btn" (click)="orderBy('CompletedTasks')">Completed</button>
           </div>
         </div>
     

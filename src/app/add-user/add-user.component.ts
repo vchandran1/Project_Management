@@ -47,7 +47,7 @@ export class AddUserComponent implements OnInit {
       // alert(dt._body)
       this.temp=0;
       this.disabled=false;
-      this.getUsers();
+      this.ngOnInit()
     })
   }
   cancelUserData(){
@@ -57,15 +57,21 @@ export class AddUserComponent implements OnInit {
   firstName;
   lastName;
   empId;
-  errorValidation=false;
+  errorValidation=false;existUser=false;
   addUser(formvalidation){
     if(formvalidation.valid){
-      this.http.post("AddUser/addUser",{firstName:this.firstName,lastName:this.lastName,empId:this.empId}).subscribe(dt=>{
-        // alert(dt._body);
-        this.getUsers();
-        this.firstName='';
-        this.lastName='';
-        this.empId='';
+      this.http.post("AddUser/addUser",{firstName:this.firstName,lastName:this.lastName,empId:this.empId}).subscribe(result=>{
+        console.log(result);
+        if(JSON.parse(result._body).status == 200){
+          this.getUsers();
+          this.firstName='';
+          this.lastName='';
+          this.empId='';
+          this.existUser=false;
+        }else{
+          // alert("emplyee id Existed")
+          this.existUser=true;
+        }
       }) 
     }else{
       this.errorValidation=true;
@@ -75,6 +81,7 @@ export class AddUserComponent implements OnInit {
     this.firstName='';
     this.lastName='';
     this.empId='';
+    this.existUser=false;
   }
 
   //=============    get users data   ===============

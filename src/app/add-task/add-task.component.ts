@@ -68,6 +68,9 @@ export class AddTaskComponent implements OnInit {
   showProjectList(){
     this.showprojectlist=true;
   }
+  mouseLeave(){
+    alert("mouse Out")
+  }
   search={Project:''};Project_ID;
   attachProjectName(name,id){
     this.search.Project=name;
@@ -78,12 +81,12 @@ export class AddTaskComponent implements OnInit {
   parentTask=false;ParentTask;Task;
   parentTaskCheck(){
     //alert(this.Task)
-    if(this.parentTask == true){
-      this.ParentTask="";
-    }else{
-      //alert(this.Task)
-      this.serchParentTask.Parent_Task=this.Task
-    }
+    // if(this.parentTask == true){
+    //   this.serchParentTask.Parent_Task="";
+    // }else{
+    //   //alert(this.Task)
+    //   this.serchParentTask.Parent_Task=''
+    // }
   }
 
     //=============    get users data   ===============
@@ -130,6 +133,9 @@ export class AddTaskComponent implements OnInit {
           this.ParentTask_id=id;
           this.showParentTasklist=false
         }
+        parentTaskChange(){
+          this.ParentTask_id='';
+        }
 
     // ==========  Add Task  =============
     StartDate;EndDate
@@ -144,7 +150,7 @@ export class AddTaskComponent implements OnInit {
         User_id:this.User_id,
         parent_ID:this.ParentTask_id
       }
-          // console.log(task)
+          console.log(task)
     if(formvalidation.form.controls.EndDate.status=="VALID" && 
     formvalidation.form.controls.StartDate.status=="VALID"){
       this.http.post("AddTask/addTask",task).subscribe(dt=>{
@@ -165,9 +171,9 @@ export class AddTaskComponent implements OnInit {
         Start_Date:this.StartDate,
         End_Date:this.EndDate,
         Priority:this.Priority,
-        parent_ID:this.ParentTask_id
+        Parent_ID:this.ParentTask_id
       }
-          //console.log(task)
+          console.log(task)
     if(formvalidation.form.controls.EndDate.status=="VALID" && 
     formvalidation.form.controls.StartDate.status=="VALID"){
       this.http.post("AddTask/UpdateTask",task).subscribe(dt=>{

@@ -10,11 +10,11 @@
               </div>
               <div class="col-md-10 ">
                 <div class="row">
-                  <div class="col-md-9 col-sm-7 col-8">
+                  <div class="col-md-9 col-sm-7 col-8" >
                       <input type="text" class="input-text" placeholder="" name="Project" [(ngModel)]="search.Project" (click)="showProjectList()" autocomplete="off" [disabled]="!disabled" required>
                       <div class="row dropdown">
-                        <div class="col-md-12">
-                            <ul class="list-group projectSearch" *ngIf="showprojectlist">
+                        <div class="col-md-12" >
+                            <ul class="list-group projectSearch" *ngIf="showprojectlist" >
                                 <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let project of Projects | filterBy:search" (click)="attachProjectName(project.Project,project._id)">
                                   {{project.Project}}
                                 </li>
@@ -66,12 +66,16 @@
                 <div class="col-md-10 ">
                   <div class="row">
                     <div class="col-md-9 col-sm-7 col-8">
-                        <input type="text" class="input-text" placeholder="" name="ParentTask" autocomplete="off" [(ngModel)]="serchParentTask.Parent_Task" (click)="showParentTaskList()" required>
-                        <ul class="list-group projectSearch" *ngIf="showParentTasklist && !parentTask">
-                          <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let parent of parentTasks | filterBy:serchParentTask" (click)="attachParentTask(parent.Parent_Task,parent._id)">
-                            {{parent.Parent_Task}}
-                          </li>
-                        </ul>
+                        <input type="text" class="input-text" placeholder="" name="ParentTask" autocomplete="off" [(ngModel)]="serchParentTask.Parent_Task" (click)="showParentTaskList()" (change)="parentTaskChange()" required>
+                        <div class="row dropdown">
+                          <div class="col-md-12">
+                              <ul class="list-group projectSearch" *ngIf="showParentTasklist ">
+                                  <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let parent of parentTasks | filterBy:serchParentTask" (click)="attachParentTask(parent.Parent_Task,parent._id)">
+                                    {{parent.Parent_Task}}
+                                  </li>
+                                </ul>
+                          </div>
+                        </div>
                     </div>
                     <div class="col-md-3 col-sm-5 col-4">
                         <button class="btn-search">Search</button>
@@ -105,13 +109,17 @@
                 </div>
                 <div class="col-md-10 ">
                   <div class="row">
-                    <div class="col-md-9 col-sm-7 col-8">
+                    <div class="col-md-9 col-sm-7 col-8" >
                         <input type="text" class="input-text" placeholder="" name="user" autocomplete="off" [(ngModel)]="searchUser.firstName" [disabled]="!disabled" (click)="showUserList()" required>
-                        <ul class="list-group projectSearch" *ngIf="showuserlist">
-                          <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let user of users | filterBy:searchUser" (click)="attachUserName(user.firstName,user._id)">
-                            {{user.firstName}}
-                          </li>
-                        </ul>
+                        <div class="row dropdown">
+                            <div class="col-md-12">
+                                <ul class="list-group projectSearch" *ngIf="showuserlist">
+                                    <li class="list-group-item list-group-item-dark list-padding-top" *ngFor="let user of users | filterBy:searchUser" (click)="attachUserName(user.firstName,user._id)">
+                                      {{user.firstName}}
+                                    </li>
+                                  </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3 col-sm-5 col-4">
                         <button class="btn-search">Search</button>
@@ -128,8 +136,8 @@
         </div>
         <div class="add-button-div2" *ngIf="updateButton">
             <button class="add-button" (click)="saveUpdateTask(formvalidation)">Update</button>
-            <button class="add-button" >
-                <a href='#' class="a-cancel" [routerLink]="['/viewTask']" (click)="cnacel()">Cancel</a></button>
+            <button class="add-button" [routerLink]="['/viewTask']" (click)="cnacel()" >
+                <a  class="a-cancel" >Cancel</a></button>
           </div>
       </div>
     

@@ -22,8 +22,8 @@
     margin-bottom: 0 !important;
   }
   .projectSearch{
-    margin-top: .1rem;
-    z-index: 1;
+    max-height: 10rem;
+    overflow: auto;
   }
   ul:hover{
     background-color: blue;

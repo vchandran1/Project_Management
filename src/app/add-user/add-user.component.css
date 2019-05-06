@@ -46,3 +46,8 @@ margin-top: 1rem;
 .alert{
     padding: .50rem 1.25rem;
 }
+.error-msg{
+    float: right;
+    margin-bottom: 0;
+    color: indianred;
+}
