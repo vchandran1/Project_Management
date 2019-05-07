@@ -2,7 +2,6 @@
 Needed Tools & Softwares:
 
 Node : ^10.13.0
-Angular: @angular/cli (7.0.0)
 Mongoldb: ^3.5.2
 GIT Repository : https://github.com/vchandran1/Project_Management.git
 
@@ -22,16 +21,10 @@ Step 2 : Run Node server
 
 	node -v
 
-2. Go to project folder and open a new terminal and install node_modules.
+2. Go to project folder and open a new terminal and install node_modules. Under application-ui folder.
 
 	npm install
 
 3. To run node server use below command 
 
-	node server.js
-
-Step 3: run Angular Server to open the angular page.
-
-1.  Open project folder in terminal and type below command to run angular server
-	
-	ng serve -o —proxy-config proxy.json
+	npm start
