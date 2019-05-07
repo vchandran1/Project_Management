@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props)
+    // console.log(props)
     this.setState({
         activeTab: props.activeTab 
     });
@@ -61,9 +61,9 @@ class App extends Component {
     var dis = this;
     request
       .get('http://localhost:3000/spi/users/getAllUsers', function (err, httpResponse, body) {
-        console.log(err);
-        console.log(httpResponse);
-        console.log(body);
+        // console.log(err);
+        // console.log(httpResponse);
+        // console.log(body);
         dis.setState({
           userList: JSON.parse(body)
         })
@@ -71,9 +71,9 @@ class App extends Component {
 
       request
       .get('http://localhost:3000/spi/projects/getProjects', function (err, httpResponse, body) {
-        console.log(err);
-        console.log(httpResponse);
-        console.log(body);
+        // console.log(err);
+        // console.log(httpResponse);
+        // console.log(body);
         dis.setState({
           projectsList: JSON.parse(body)
         })
@@ -81,9 +81,9 @@ class App extends Component {
 
       request
       .get('http://localhost:3000/spi/task/getTasks', function (err, httpResponse, body) {
-        console.log(err);
-        console.log(httpResponse);
-        console.log(body);
+        // console.log(err);
+        // console.log(httpResponse);
+        // console.log(body);
         dis.setState({
           taskList: JSON.parse(body)
         })
@@ -91,9 +91,9 @@ class App extends Component {
 
       request
       .get('http://localhost:3000/spi/task/getParentTasks', function (err, httpResponse, body) {
-        console.log(err);
-        console.log(httpResponse);
-        console.log(body);
+        // console.log(err);
+        // console.log(httpResponse);
+        // console.log(body);
         dis.setState({
           parentTaskList: JSON.parse(body)
         })
@@ -221,7 +221,7 @@ class App extends Component {
           json: task
         },
         function (err, httpResponse, body) {
-          console.log(body);
+          // console.log(body);
           dis.setState({
             taskList: body,
             addUserResponse: {

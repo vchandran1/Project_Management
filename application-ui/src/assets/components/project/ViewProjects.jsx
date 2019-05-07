@@ -119,12 +119,12 @@ class ViewProjects extends Component {
     }
 
     updateProject(project) {
-        console.log(project);
+        // console.log(project);
         this.props.updateProject(project);
     }
 
     suspendProject(project) {
-        console.log(project);
+        // console.log(project);
     }
 
 }

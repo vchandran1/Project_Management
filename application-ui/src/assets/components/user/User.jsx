@@ -56,8 +56,8 @@ class User extends Component {
   }
 
   addOrEditUser(action, user) {
-    console.log("From parent, action = " + action);
-    console.log(user);
+    // console.log("From parent, action = " + action);
+    // console.log(user);
     // let userListUpdated = this.state.userList;
     // if (action === 'addUser') {
     //   userListUpdated.push(user)
@@ -80,7 +80,7 @@ class User extends Component {
         json: user
       },
       function (err, httpResponse, body) {
-        console.log(body);
+        // console.log(body);
         dis.setState({
           userList: body,
           showLoadingModal: false,
@@ -111,7 +111,7 @@ class User extends Component {
         json: userToDelete
       },
       function (err, httpResponse, body) {
-        console.log(body);
+        // console.log(body);
         dis.setState({
           userList: body,
           showLoadingModal: false,

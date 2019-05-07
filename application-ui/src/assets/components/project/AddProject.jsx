@@ -38,8 +38,8 @@ class AddProject extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("Next set of props")
-        console.log(nextProps)
+        // console.log("Next set of props")
+        // console.log(nextProps)
         const projectDetails = nextProps.currentProject;
         if (projectDetails) {
             const startDate = projectDetails.startDate;
@@ -175,7 +175,7 @@ class AddProject extends Component {
     }
 
     focus(name, e) {
-        console.log(name);
+        // console.log(name);
         const prop = name + "Invalid"
         this.setState({
             [prop]: false
@@ -218,7 +218,7 @@ class AddProject extends Component {
     }
 
     assignUser(user) {
-        console.log(user)
+        // console.log(user)
         this.setState(prevState => ({
             managerName: user.firstName + ' ' + user.lastName,
             managerId: user.id,
@@ -235,7 +235,7 @@ class AddProject extends Component {
 
     searchUser(e) {
         this.toggle();
-        console.log(e);
+        // console.log(e);
     }
 
     reset(e) {
@@ -300,8 +300,8 @@ class AddProject extends Component {
     }
 
     addOrEditProject(e, userAction) {
-        console.log(e);
-        console.log(userAction)
+        // console.log(e);
+        // console.log(userAction)
         if (this.validateForm()) {
             return;
         }
@@ -322,7 +322,7 @@ class AddProject extends Component {
         }
 
         // TODO - validation
-        console.log(projectDetails);
+        // console.log(projectDetails);
         this.props.addProject(userAction, projectDetails);
         this.reset();
     }

@@ -26,8 +26,8 @@ class Project extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("Next set of props")
-        console.log(nextProps)
+        // console.log("Next set of props")
+        // console.log(nextProps)
         this.setState({
             userList: nextProps.userList || [],
             projectsList: nextProps.projectsList || []
@@ -91,7 +91,7 @@ class Project extends Component {
                 json: projectDetails
             },
             function (err, httpResponse, body) {
-                console.log(body);
+                // console.log(body);
                 dis.setState({
                     projectsList: body,
                     currentProject: {},

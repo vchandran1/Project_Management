@@ -41,8 +41,8 @@ class AddTask extends Component {
     }
 
     componentWillReceiveProps(props) {
-        console.log("Next set of props")
-        console.log(props)
+        // console.log("Next set of props")
+        // console.log(props)
         let currentTask = props.currentTask;
         let additionalProps = {}
         if (currentTask) {
@@ -351,8 +351,8 @@ class AddTask extends Component {
     }
 
     addOrEditTask(e, userAction) {
-        console.log(e);
-        console.log(userAction)
+        // console.log(e);
+        // console.log(userAction)
 
         if (this.validateForm()) {
             return;
@@ -386,7 +386,7 @@ class AddTask extends Component {
                 json: task
             },
             function (err, httpResponse, body) {
-                console.log(body);
+                // console.log(body);
                 dis.setState({
                     taskList: body,
                     addUserResponse: {
@@ -401,7 +401,7 @@ class AddTask extends Component {
         );
 
         // TODO - validation
-        console.log(task);
+        // console.log(task);
         this.reset();
     }
 

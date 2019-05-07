@@ -97,13 +97,13 @@ button.secondary:focus {
   border-bottom:2px solid #233f7a !important;
 }
 .btn-secondary{
-  background-color: #32c5d2 !important;
+  background-color: #b6baba !important;
   color: #FFF;
   border:0 !important;
 }
 .btn-secondary:focus,.btn-secondary:hover{
-  background-color: #26a1ab !important;
-  border-color: #26a1ab !important;
+  background-color: #8d8e8e !important;
+  border-color: #8d8e8e !important;
 }
 button.secondary{
   background-color: #e1e5ec !important;

@@ -24,8 +24,8 @@ class AddUser extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("Next set of props")
-        console.log(nextProps)
+        // console.log("Next set of props")
+        // console.log(nextProps)
         if (nextProps.addUserResponse && nextProps.addUserResponse.status == "success") {
             // Show success message?
             this.reset();
@@ -84,7 +84,7 @@ class AddUser extends Component {
     }
 
     focus(name, e){
-        console.log(name);
+        // console.log(name);
         const prop = name+"Invalid"
         this.setState({
             [prop]: false
@@ -102,7 +102,7 @@ class AddUser extends Component {
             lastName: this.state.lastName,
             employeeID: this.state.employeeID
         };
-        console.log(user);
+        // console.log(user);
         this.props.addOrEditUser(action, user);
     }
 

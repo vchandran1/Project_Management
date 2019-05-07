@@ -13,8 +13,8 @@ class ViewTask extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log("Next set of props")
-    console.log(props)
+    // console.log("Next set of props")
+    // console.log(props)
 
     this.setState({
         taskList: props.taskList,
