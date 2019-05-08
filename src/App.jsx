@@ -18,12 +18,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     let defaultuserList = [{
-      firstName: 'KJ',
-      lastName: 'JK',
-      employeeID: '3002248'
+      firstName: 'Veera',
+      lastName: 'Chandran',
+      employeeID: '5059491'
     }, {
-      firstName: 'KJ-1',
-      lastName: 'JK-1',
+      firstName: 'RamPrasath',
+      lastName: 'Rajasekaran',
       employeeID: '3002249'
     }]
     let defaultTaskList = [{
