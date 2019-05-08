@@ -117,7 +117,7 @@ class App extends Component {
           <img srcSet={logo} width="200" height="40" />
         </div>
         <Navbar color="light" light expand="md" sticky="top">
-          <NavbarBrand href="/" >Project Manager App</NavbarBrand>
+          <NavbarBrand href="/" >Project Management Application</NavbarBrand>
         </Navbar>
         <div className="app-container">
           <Nav tabs>
