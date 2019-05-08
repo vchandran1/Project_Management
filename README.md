@@ -1,30 +1,9 @@
-# Project_Manager
-Needed Tools & Softwares:
+Steps to run Services application
+Prerequisites
+1.	NodeJS v 10.x installed or available
 
-Node : ^10.13.0
-Mongoldb: ^3.5.2
-GIT Repository : https://github.com/vchandran1/Project_Management.git
-
-Step 1: Run Mongodb sever by following below steps.
-
-1. Create directories folder “data/db” in C directory.
-2. Go  to Mongodb installed folder and open a terminal tab in the folder. Run below command in that folder.
-
-	“./mongod.exe" --dbpath="c:\data\db”
-3. Open another terminal/command prompt and run below command
-
-	./mongo.exe
-
-Step 2 : Run Node server
-
-1. Install node v10.13.0 in your system, to check your installed node version, type below command in terminal.
-
-	node -v
-
-2. Go to project folder and open a new terminal and install node_modules. Under application-ui folder.
-
-	npm install
-
-3. To run node server use below command 
-
-	npm start
+Setup
+1.	Clone or download both the code from repo - https://github.com/vchandran1/pm_application-ui
+2.	Run npm install
+3.	Run npm start
+By default, this will try to connect to localhost:9001 for services. If we have services deployed onto a different host/port, please update the corresponding host/port in setupProxy.js (https://github.com/vchandran1/pm_application-ui/blob/master/src/setupProxy.js) and then run “npm start”
