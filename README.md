@@ -8,4 +8,4 @@ Setup
 3.	Run npm start
 By default, this will try to connect to localhost:9001 for services. If we have services deployed onto a different host/port, please update the corresponding host/port in setupProxy.js (https://github.com/vchandran1/pm_application-ui/blob/master/src/setupProxy.js) and then run “npm start”
 
-Test Plugin.
+Test Plugin 2.
